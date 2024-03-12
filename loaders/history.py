@@ -36,7 +36,7 @@ class HistoryFutureLoader(HistoryLoader):
 
 
 class HistoryBasisLoader:
-    def load(self, undl, contract='CURRENT_QUARTER'):
+    def load(self, undl='BTC', contract='CURRENT_QUARTER'):
         client = get_client(ENV)
         df_spot = HistoryLoader().load(undl)
         df_spot = df_spot.rename({'close': 'spot'}, axis=1)

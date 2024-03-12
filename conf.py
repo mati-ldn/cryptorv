@@ -11,5 +11,5 @@ UNDLS = ['BTC', 'ETH', 'LTC', 'BNB', 'XRP']
 
 
 # TODO: automate
-FRONT_EXP = '230929'
-BACK_EXP = '231229'
+FRONT_EXP = '240329'
+BACK_EXP = '240628'

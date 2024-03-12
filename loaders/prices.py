@@ -40,7 +40,7 @@ class FuturePriceLoader:
 
 
 if __name__ == '__main__':
-    tickers = ['BTCBUSD', 'BTCUSD_210625', 'BTCUSD_210924']
+    tickers = ['BTCBUSD', 'BTCUSD_240329', 'BTCUSD_240628']
     loader = CombinedPriceLoader()
     dfs = []
     for t in tickers:

@@ -7,13 +7,13 @@ def color_style(x):
     return ""
 
 
-def table_format(df):
+def table_format(df, col_format="{:,.0f}"):
     num_cols = df.select_dtypes('number').columns
     df = df.style.applymap(color_style)
-    df = df.format({c: "{:,.0f}" for c in num_cols})
+    df = df.format({c: col_format for c in num_cols})
     df = df.set_table_styles([{
         'selector': 'thead th',  # Selects the header cells
-        'props': [('background-color', 'darkred'), ('color', 'white'),
+        'props': [('background-color', 'black'), ('color', 'white'),
                   ('font-weight', 'bold')]
     }])
     return df
