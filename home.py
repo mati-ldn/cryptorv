@@ -27,12 +27,12 @@ def main():
     with cols[1]:
         st.line_chart(df, x='date', y='basis')
 
-    # st.subheader('All Undl')
-    # df = BasisSummaryTblPct().load()
-    # df = df.set_index('expiry_date')
-    # df.index = [str(i) for i in df.index]
-    # df = df.apply(pd.to_numeric)
-    # st.table(table_format(df))
+    st.subheader('All Undl')
+    df = BasisSummaryTblPct().load()
+    df = df.set_index('expiry_date')
+    df.index = [str(i) for i in df.index]
+    df = df.apply(pd.to_numeric)
+    st.table(table_format(df))
 
 if __name__ == '__main__':
     if runtime.exists():
