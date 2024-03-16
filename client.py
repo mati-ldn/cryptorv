@@ -13,5 +13,5 @@ def get_client(env='DEV'):
         api_secret = os.environ.get('binance_secret')
     client = Client(api_key, api_secret)
     if env == 'DEV':
-        client.API_URL = 'https://testnet.binance.vision/api'
+        client.API_URL = 'https://data.binance.us.com/api/v3'
     return client
