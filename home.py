@@ -4,9 +4,9 @@ import streamlit as st
 from streamlit import runtime
 from streamlit.web import cli as stcli
 
-from cryptorv.data.basis import BasisTbl, BasisSummaryTblAbs, BasisSummaryTblPct
-from cryptorv.loaders.history import HistoryLoader, HistoryBasisLoader
-from cryptorv.formatters import table_heatmap, table_format
+from data.basis import BasisTbl, BasisSummaryTblAbs, BasisSummaryTblPct
+from loaders.history import HistoryLoader, HistoryBasisLoader
+from formatters import table_heatmap, table_format
 
 
 def main():
