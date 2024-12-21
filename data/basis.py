@@ -17,7 +17,7 @@ class BasisTbl:
             dfs.append(df_)
         df = pd.concat(dfs)
         df['price'] = df['price'].apply(float)
-        df['time'] = pd.to_datetime(df['time'])
+        # df['time'] = pd.to_datetime(df['time'])
         spot_px = df.loc[df['symbol'] == spot, 'price'].item()
         df['spot'] = spot_px
         df['basis'] = df['spot'] - df['price']
