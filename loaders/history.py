@@ -12,7 +12,9 @@ class HistoryLoader:
         bars = client.get_historical_klines(ticker, '1d', timestamp, limit=1000)
         for line in bars:
             del line[5:]
-        df = pd.DataFrame(bars, columns=['date', 'open', 'high', 'low', 'close'])
+        df = pd.DataFrame(
+            bars, columns=['date', 'open', 'high', 'low', 'close']
+        )
         df.set_index('date', inplace=True)
         df = df.applymap(float)
         df.index = pd.to_datetime(df.index, unit='ms')
@@ -23,12 +25,14 @@ class HistoryFutureLoader(HistoryLoader):
     def load(self, undl='BTC', contract='CURRENT_QUARTER'):
         pair = f'{undl}USD'
         client = get_client(ENV)
-        bars = client.futures_coin_continous_klines(pair=pair,
-                                             contractType=contract,
-                                             interval='1d')
+        bars = client.futures_coin_continous_klines(
+            pair=pair, contractType=contract, interval='1d'
+        )
         for line in bars:
             del line[5:]
-        df = pd.DataFrame(bars, columns=['date', 'open', 'high', 'low', 'close'])
+        df = pd.DataFrame(
+            bars, columns=['date', 'open', 'high', 'low', 'close']
+        )
         df.set_index('date', inplace=True)
         df = df.applymap(float)
         df.index = pd.to_datetime(df.index, unit='ms')

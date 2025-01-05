@@ -11,11 +11,21 @@ class BasisViewer:
 
     def basis_tbl(self):
         df = BasisTbl().load()
-        df = df[['symbol', 'price', 'spot', 'basis', 'basis_pct', 'days_to_exp', 'basis_pct_ann']]
+        df = df[
+            [
+                'symbol',
+                'price',
+                'spot',
+                'basis',
+                'basis_pct',
+                'days_to_exp',
+                'basis_pct_ann',
+            ]
+        ]
         df = df.set_index('symbol')
         df = df.iloc[1:]
         return df
-    
+
     def timeseries(self):
         df = HistoryBasisLoader().load('BTC')
         return df
