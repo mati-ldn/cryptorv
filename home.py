@@ -15,7 +15,7 @@ def main():
     vw = BasisViewer()
 
     df = vw.basis_tbl()
-    st.table(table_format(df))
+    st.dataframe(table_format(df))
 
     df = vw.timeseries()
     cols = st.columns(2)
@@ -26,7 +26,7 @@ def main():
 
     st.subheader('All Undl')
     df = vw.all_undl()
-    st.table(table_format(df))
+    st.dataframe(table_format(df))
 
 
 if __name__ == '__main__':
