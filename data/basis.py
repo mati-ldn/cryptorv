@@ -1,7 +1,8 @@
 import pandas as pd
 
 from loaders.prices import CombinedPriceLoader
-from conf import UNDLS, FRONT_EXP, BACK_EXP
+from utils.expiry_dates import get_expiries
+from conf import UNDLS
 
 
 class BasisTbl:
@@ -9,7 +10,7 @@ class BasisTbl:
     def load(self, undl='BTC'):
         spot = f'{undl}USDT'
         futroot = f'{undl}USD'
-        tickers = [spot, f'{futroot}_{FRONT_EXP}', f'{futroot}_{BACK_EXP}']
+        tickers = [spot] + [f'{futroot}_{x:%y%m%d}' for x in get_expiries()]
         loader = CombinedPriceLoader()
         dfs = []
         for t in tickers:
@@ -21,7 +22,7 @@ class BasisTbl:
         spot_px = df.loc[df['symbol'] == spot, 'price'].item()
         df['spot'] = spot_px
         df['basis'] = df['spot'] - df['price']
-        df['basis_pct'] = df['basis'] / df['spot']
+        df['irr'] = ((df['price'] / df['spot']) - 1) * 100
 
         mask = df['type'] == 'fut'
         df.loc[mask, 'expiry'] = df.loc[mask, 'symbol'].apply(
@@ -34,7 +35,7 @@ class BasisTbl:
             lambda x: (x - pd.Timestamp.today()).days
         )
         df['expiry_date'] = df['expiry2'].apply(lambda x: x.date())
-        df['basis_pct_ann'] = df['basis_pct'] * (360 / df['days_to_exp'])
+        df['irr'] = df['irr'] * (360 / df['days_to_exp'])
         return df
 
 
@@ -58,4 +59,8 @@ class BasisSummaryTblAbs(BasisSummaryTblBase):
 
 
 class BasisSummaryTblPct(BasisSummaryTblBase):
-    value = 'basis_pct_ann'
+    value = 'irr'
+
+
+if __name__ == '__main__':
+    BasisTbl().load()

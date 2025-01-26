@@ -16,10 +16,8 @@ class BasisViewer:
                 'symbol',
                 'price',
                 'spot',
-                'basis',
-                'basis_pct',
                 'days_to_exp',
-                'basis_pct_ann',
+                'irr',
             ]
         ]
         df = df.set_index('symbol')

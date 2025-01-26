@@ -9,6 +9,7 @@ from conf import ENV
 
 class CombinedPriceLoader:
     def load(self, ticker):
+        df = pd.DataFrame()
         if '_' in ticker:
             df = FuturePriceLoader().load(ticker)
             df['type'] = 'fut'
@@ -32,10 +33,15 @@ class PriceLoader:
 
 class FuturePriceLoader:
     def load(self, ticker):
-        client = get_client(ENV)
-        data = client.futures_coin_symbol_ticker(symbol=ticker)
-        data = data[0]
-        df = pd.DataFrame.from_dict(data, orient='index').transpose()
+        df = pd.DataFrame()
+        try:
+            client = get_client(ENV)
+            data = client.futures_coin_symbol_ticker(symbol=ticker)
+            data = data[0]
+            df = pd.DataFrame.from_dict(data, orient='index').transpose()
+        except:
+            logging.info(f'{ticker} not available')
+            data = {'symbol': ticker, 'price': np.nan}
         return df
 
 

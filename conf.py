@@ -8,8 +8,3 @@ ENV = 'PROD'
 
 # UNDLS = ['BTC', 'ETH', 'LTC', 'BNB', 'ADA', 'XRP']
 UNDLS = ['BTC', 'ETH', 'LTC', 'BNB', 'XRP']
-
-
-# TODO: automate
-FRONT_EXP = '241227'
-BACK_EXP = '250328'
