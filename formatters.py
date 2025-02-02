@@ -7,10 +7,15 @@ def color_style(x):
     return ""
 
 
-def table_format(df, col_format="{:,.0f}"):
+def table_format(df, col_format="{:,.0f}", custom_formats=None):
     num_cols = df.select_dtypes('number').columns
     df = df.style.applymap(color_style)
-    df = df.format({c: col_format for c in num_cols})
+
+    if custom_formats is None:
+        custom_formats = {}
+    formats = {col: custom_formats.get(col, col_format) for col in num_cols}
+    df = df.format(formats)
+
     df = df.set_table_styles(
         [
             {
@@ -39,11 +44,11 @@ def table_format_total(df):
     return df
 
 
-def table_heatmap(df, cmap='RdBu'):
+def table_heatmap(df, cmap='coolwarm', col_format="{:,.0f}"):
     max_ = abs(max(df.max(numeric_only=True, axis=1)))
     min_ = abs(min(df.min(numeric_only=True, axis=1)))
     number = max(min_, max_)
-    style = table_format_total(df)
+    style = table_format(df, col_format)
     style = style.background_gradient(
         cmap=cmap, axis=None, vmax=number, vmin=number * -1
     )  # .format(":,.0f")

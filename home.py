@@ -15,7 +15,9 @@ def main():
     vw = BasisViewer()
 
     df = vw.basis_tbl()
-    st.dataframe(table_format(df))
+    st.dataframe(table_format(df, custom_formats={'irr': '{:.1%}'}))
+
+
 
     df = vw.timeseries()
     cols = st.columns(2)
@@ -26,7 +28,7 @@ def main():
 
     st.subheader('All Undl')
     df = vw.all_undl()
-    st.dataframe(table_format(df))
+    st.dataframe(table_heatmap(df, col_format='{:.1%}'))
 
 
 if __name__ == '__main__':

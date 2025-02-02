@@ -22,7 +22,7 @@ class BasisTbl:
         spot_px = df.loc[df['symbol'] == spot, 'price'].item()
         df['spot'] = spot_px
         df['basis'] = df['spot'] - df['price']
-        df['irr'] = ((df['price'] / df['spot']) - 1) * 100
+        df['irr'] = ((df['price'] / df['spot']) - 1)
 
         mask = df['type'] == 'fut'
         df.loc[mask, 'expiry'] = df.loc[mask, 'symbol'].apply(
