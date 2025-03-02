@@ -6,18 +6,20 @@ from streamlit.web import cli as stcli
 
 from viewer import BasisViewer
 from formatters import table_heatmap, table_format
+from conf import UNDLS
 
 
 def main():
-    st.title(':dollar: Crypto RV')
-    st.subheader('App to monitor cash-future basis')
+    st.title(':classical_building: Crypto RV')
 
-    vw = BasisViewer()
+    cols = st.columns([1, 4])
+    with cols[0]:
+        undl = st.selectbox('Select Underlying', UNDLS)
+
+    vw = BasisViewer(undl)
 
     df = vw.basis_tbl()
     st.dataframe(table_format(df, custom_formats={'irr': '{:.1%}'}))
-
-
 
     df = vw.timeseries()
     cols = st.columns(2)

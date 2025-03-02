@@ -6,11 +6,11 @@ from loaders.history import HistoryLoader, HistoryBasisLoader
 
 class BasisViewer:
 
-    def __init__(self):
-        pass
+    def __init__(self, undl='BTC'):
+        self.undl = undl
 
     def basis_tbl(self):
-        df = BasisTbl().load()
+        df = BasisTbl().load(self.undl)
         df = df[
             [
                 'symbol',
@@ -25,7 +25,7 @@ class BasisViewer:
         return df
 
     def timeseries(self):
-        df = HistoryBasisLoader().load('BTC')
+        df = HistoryBasisLoader().load(self.undl)
         return df
 
     def all_undl(self):
