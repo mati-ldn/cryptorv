@@ -30,7 +30,7 @@ class BasisViewer:
 
     def all_undl(self):
         df = BasisSummaryTblPct().load()
-        df = df.set_index('expiry_date')
+        df = df.set_index('expiry')
         df.index = [str(i) for i in df.index]
         df = df.apply(pd.to_numeric)
         return df

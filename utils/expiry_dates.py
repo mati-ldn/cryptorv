@@ -41,4 +41,3 @@ def get_expiries():
 if __name__ == '__main__':
     dates = get_expiries()
     print(dates)
-

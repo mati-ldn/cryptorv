@@ -17,12 +17,14 @@ class BasisTbl:
             df_ = loader.load(t)
             dfs.append(df_)
         df = pd.concat(dfs)
+        df = df.dropna()
+        df['undl'] = undl
         df['price'] = df['price'].apply(float)
         # df['time'] = pd.to_datetime(df['time'])
         spot_px = df.loc[df['symbol'] == spot, 'price'].item()
         df['spot'] = spot_px
         df['basis'] = df['spot'] - df['price']
-        df['irr'] = ((df['price'] / df['spot']) - 1)
+        df['irr'] = (df['price'] / df['spot']) - 1
 
         mask = df['type'] == 'fut'
         df.loc[mask, 'expiry'] = df.loc[mask, 'symbol'].apply(
@@ -47,9 +49,7 @@ class BasisSummaryTblBase:
         dfs = [loader.load(x) for x in UNDLS]
         df = pd.concat(dfs)
         df = df.dropna()
-        df = df.pivot_table(
-            index='expiry_date', columns='ps', values=self.value
-        )
+        df = df.pivot_table(index='expiry', columns='undl', values=self.value)
         df = df.reset_index()
         return df
 
@@ -63,4 +63,4 @@ class BasisSummaryTblPct(BasisSummaryTblBase):
 
 
 if __name__ == '__main__':
-    BasisTbl().load()
+    BasisSummaryTblPct().load()

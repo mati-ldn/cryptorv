@@ -3,46 +3,63 @@ import logging
 import pandas as pd
 import numpy as np
 
-from client import get_client
+from client import BinanceDataFetcher
 from conf import ENV
 
 
 class CombinedPriceLoader:
+    def __init__(self):
+        self.fetcher = BinanceDataFetcher()
+
     def load(self, ticker):
         df = pd.DataFrame()
         if '_' in ticker:
-            df = FuturePriceLoader().load(ticker)
+            df = FuturePriceLoader(self.fetcher).load(ticker)
             df['type'] = 'fut'
         else:
-            df = PriceLoader().load(ticker)
+            df = PriceLoader(self.fetcher).load(ticker)
             df['type'] = 'spot'
         return df
 
 
 class PriceLoader:
+    def __init__(self, fetcher):
+        self.fetcher = fetcher
+
     def load(self, ticker):
-        client = get_client(ENV)
         try:
-            data = client.get_symbol_ticker(symbol=ticker)
-        except:
-            logging.info(f'{ticker} not available')
+            if 'USD' in ticker:
+                base = ticker.replace('USD', '')
+                quote = 'USD'
+            else:
+                base = ticker[:-4]
+                quote = ticker[-4:]
+            
+            price = self.fetcher.get_current_price(base, quote)
+            data = {'symbol': ticker, 'price': price}
+        except Exception as e:
+            logging.info(f'{ticker} not available: {str(e)}')
             data = {'symbol': ticker, 'price': np.nan}
-        df = pd.DataFrame.from_dict(data, orient='index').transpose()
-        return df
+        
+        return pd.DataFrame([data])
 
 
 class FuturePriceLoader:
+    def __init__(self, fetcher):
+        self.fetcher = fetcher
+
     def load(self, ticker):
-        df = pd.DataFrame()
         try:
-            client = get_client(ENV)
-            data = client.futures_coin_symbol_ticker(symbol=ticker)
-            data = data[0]
-            df = pd.DataFrame.from_dict(data, orient='index').transpose()
-        except:
-            logging.info(f'{ticker} not available')
-            data = {'symbol': ticker, 'price': np.nan}
-        return df
+            base = ticker.split('USD_')[0]
+            data = {'symbol': ticker}
+            
+            futures_data = self.fetcher.client.futures_coin_symbol_ticker(symbol=ticker)[0]
+            data['price'] = float(futures_data['price'])
+            
+            return pd.DataFrame([data])
+        except Exception as e:
+            logging.info(f'{ticker} not available: {str(e)}')
+            return pd.DataFrame([{'symbol': ticker, 'price': np.nan}])
 
 
 if __name__ == '__main__':
