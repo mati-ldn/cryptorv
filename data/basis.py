@@ -1,4 +1,5 @@
 import pandas as pd
+import logging
 
 from loaders.prices import CombinedPriceLoader
 from utils.expiry_dates import get_expiries
@@ -8,6 +9,15 @@ from conf import UNDLS
 class BasisTbl:
 
     def load(self, undl='BTC'):
+        try:
+            df = self._load(undl)
+            logging.info(df)
+            return df
+        except:
+            logging.info(f'failed for {undl}')
+            return
+
+    def _load(self, undl):
         spot = f'{undl}USDT'
         futroot = f'{undl}USD'
         tickers = [spot] + [f'{futroot}_{x:%y%m%d}' for x in get_expiries()]
@@ -47,6 +57,7 @@ class BasisSummaryTblBase:
     def load(self):
         loader = BasisTbl()
         dfs = [loader.load(x) for x in UNDLS]
+        #dfs = [loader.load(x) for x in ['LTC']]
         df = pd.concat(dfs)
         df = df.dropna()
         df = df.pivot_table(index='expiry', columns='undl', values=self.value)
@@ -63,4 +74,5 @@ class BasisSummaryTblPct(BasisSummaryTblBase):
 
 
 if __name__ == '__main__':
-    BasisSummaryTblPct().load()
+    df = BasisSummaryTblPct().load()
+    print(df)

@@ -37,8 +37,8 @@ class BinanceDataFetcher:
 
     def get_symbol(self, base: str, quote: str = 'USDT') -> str:
         """Format symbol according to exchange requirements"""
-        if self.use_us and quote == 'USDT':
-            quote = 'USD'  # Binance.US uses USD instead of USDT for most pairs
+        # if self.use_us and quote == 'USDT':
+        #     quote = 'USD'  # Binance.US uses USD instead of USDT for most pairs
         return f"{base}{quote}"
 
     def get_klines(
@@ -188,7 +188,8 @@ btc_data_us = us_fetcher.get_klines('BTC')
 # Try both automatically
 def get_best_available_data(base: str = 'BTC'):
     logger.info(f"Attempting to fetch data for {base} from available exchanges")
-    for use_us in [True, False]:
+    # for use_us in [True, False]:
+    for use_us in [False, True]:
         try:
             fetcher = BinanceDataFetcher(use_us=use_us)
             return fetcher.get_klines(base)

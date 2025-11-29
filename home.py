@@ -3,6 +3,7 @@ import sys
 import streamlit as st
 from streamlit import runtime
 from streamlit.web import cli as stcli
+import plotly.express as px
 
 from viewer import BasisViewer
 from formatters import table_heatmap, table_format
@@ -10,7 +11,12 @@ from conf import UNDLS
 
 
 def main():
-    st.title(':classical_building: Crypto RV')
+    cols = st.columns([4, 1])
+    with cols[0]:
+        st.title(':classical_building: Crypto RV')
+    with cols[1]:
+        timestamp = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
+        st.write(timestamp)
 
     cols = st.columns([1, 4])
     with cols[0]:
@@ -24,9 +30,15 @@ def main():
     df = vw.timeseries()
     cols = st.columns(2)
     with cols[0]:
-        st.line_chart(df, x='date', y=['spot', 'fut'])
+        fig = px.line(
+            df, x='date', y=['spot', 'fut'], title='Spot vs Futures Price'
+        )
+        st.plotly_chart(fig)
     with cols[1]:
-        st.line_chart(df, x='date', y='basis')
+        fig = px.line(
+            df, x='date', y=['basis'], title='$ basis'
+        )
+        st.plotly_chart(fig)
 
     st.subheader('All Undl')
     df = vw.all_undl()
