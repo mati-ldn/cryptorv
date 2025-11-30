@@ -1,0 +1,101 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/mati/my_projects/cryptorv/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+BINANCE_API_KEY	conf.py	/^BINANCE_API_KEY='P8qfXIQiu3oL1054AIXxWmRryf79r6kZnZJxV9Ygb3mhSp5PHB574ccjX3UjDS8S'$/;"	v
+BINANCE_SECRET_KEY	conf.py	/^BINANCE_SECRET_KEY='7tRw3sts9eRmalcOmIF7kUs0Iol7Z90l4YpTQGDWhgWgcu9rlWG5Oh6c3AgmRDf0'$/;"	v
+BasisSummaryTblAbs	data/basis.py	/^class BasisSummaryTblAbs(BasisSummaryTblBase):$/;"	c
+BasisSummaryTblBase	data/basis.py	/^class BasisSummaryTblBase:$/;"	c
+BasisSummaryTblPct	data/basis.py	/^class BasisSummaryTblPct(BasisSummaryTblBase):$/;"	c
+BasisTbl	data/basis.py	/^class BasisTbl:$/;"	c
+BasisViewer	viewer.py	/^class BasisViewer:$/;"	c
+BinanceDataFetcher	client.py	/^class BinanceDataFetcher:$/;"	c
+CombinedPriceLoader	loaders/prices.py	/^class CombinedPriceLoader:$/;"	c
+ENV	conf.py	/^ENV = 'PROD'$/;"	v
+FuturePriceLoader	loaders/prices.py	/^class FuturePriceLoader:$/;"	c
+HistoryBasisLoader	loaders/history.py	/^class HistoryBasisLoader:$/;"	c
+HistoryFutureLoader	loaders/history.py	/^class HistoryFutureLoader(HistoryLoader):$/;"	c
+HistoryLoader	loaders/history.py	/^class HistoryLoader:$/;"	c
+PriceLoader	loaders/prices.py	/^class PriceLoader:$/;"	c
+SpanCalculator	span.py	/^class SpanCalculator:$/;"	c
+SpanParams	span.py	/^class SpanParams:$/;"	c
+UNDLS	conf.py	/^UNDLS = ['BTC', 'ETH', 'LTC', 'BNB', 'XRP']$/;"	v
+__init__	client.py	/^    def __init__($/;"	m	class:BinanceDataFetcher
+__init__	loaders/prices.py	/^    def __init__(self):$/;"	m	class:CombinedPriceLoader
+__init__	loaders/prices.py	/^    def __init__(self, fetcher):$/;"	m	class:FuturePriceLoader
+__init__	loaders/prices.py	/^    def __init__(self, fetcher):$/;"	m	class:PriceLoader
+__init__	span.py	/^    def __init__(self, params: SpanParams):$/;"	m	class:SpanCalculator
+__init__	viewer.py	/^    def __init__(self, undl='BTC'):$/;"	m	class:BasisViewer
+all_undl	viewer.py	/^    def all_undl(self):$/;"	m	class:BasisViewer
+basis_tbl	viewer.py	/^    def basis_tbl(self):$/;"	m	class:BasisViewer
+btc_data	client.py	/^btc_data = fetcher.get_klines('BTC')$/;"	v
+btc_data_us	client.py	/^btc_data_us = us_fetcher.get_klines('BTC')$/;"	v
+calculate_portfolio_margin	span.py	/^    def calculate_portfolio_margin($/;"	m	class:SpanCalculator	typeref:typename:Tuple[float,Dict[str,float]]
+calculate_risk_array	span.py	/^    def calculate_risk_array($/;"	m	class:SpanCalculator	typeref:typename:np.ndarray
+calculate_spread_charge	span.py	/^    def calculate_spread_charge(self, positions: List[Dict]) -> float:$/;"	m	class:SpanCalculator	typeref:typename:float
+color_style	formatters.py	/^def color_style(x):$/;"	f
+cryptorv	README.md	/^# cryptorv$/;"	c
+dates	utils/expiry_dates.py	/^    dates = get_expiries()$/;"	v
+df	client.py	/^    df = get_best_available_data()$/;"	v
+df	data/basis.py	/^    df = BasisSummaryTblPct().load()$/;"	v
+df	loaders/history.py	/^    df = loader.load()$/;"	v
+df	loaders/prices.py	/^    df = pd.concat(dfs)$/;"	v
+df_	loaders/prices.py	/^        df_ = loader.load(t)$/;"	v
+dfs	loaders/prices.py	/^    dfs = []$/;"	v
+example_usage	span.py	/^def example_usage():$/;"	f
+fetcher	client.py	/^fetcher = BinanceDataFetcher()$/;"	v
+fetcher	loaders/history.py	/^    fetcher = BinanceDataFetcher()$/;"	v
+get_best_available_data	client.py	/^def get_best_available_data(base: str = 'BTC'):$/;"	f
+get_current_price	client.py	/^    def get_current_price(self, base: str, quote: str = 'USDT') -> float:$/;"	m	class:BinanceDataFetcher	typeref:typename:float
+get_expiries	utils/expiry_dates.py	/^def get_expiries():$/;"	f
+get_futures_klines	client.py	/^    def get_futures_klines($/;"	m	class:BinanceDataFetcher
+get_futures_symbol	client.py	/^    def get_futures_symbol(self, base: str, quote: str = 'USDT') -> str:$/;"	m	class:BinanceDataFetcher	typeref:typename:str
+get_klines	client.py	/^    def get_klines($/;"	m	class:BinanceDataFetcher
+get_symbol	client.py	/^    def get_symbol(self, base: str, quote: str = 'USDT') -> str:$/;"	m	class:BinanceDataFetcher	typeref:typename:str
+last_friday_of_month	utils/expiry_dates.py	/^    def last_friday_of_month(year, month):$/;"	f	function:get_expiries	file:
+load	data/basis.py	/^    def load(self):$/;"	m	class:BasisSummaryTblBase
+load	data/basis.py	/^    def load(self, undl='BTC'):$/;"	m	class:BasisTbl
+load	loaders/history.py	/^    def load(self, undl='BTC'):$/;"	m	class:HistoryLoader
+load	loaders/history.py	/^    def load(self, undl='BTC', contract='CURRENT_QUARTER'):$/;"	m	class:HistoryBasisLoader
+load	loaders/history.py	/^    def load(self, undl='BTC', contract='CURRENT_QUARTER'):$/;"	m	class:HistoryFutureLoader
+load	loaders/prices.py	/^    def load(self, ticker):$/;"	m	class:CombinedPriceLoader
+load	loaders/prices.py	/^    def load(self, ticker):$/;"	m	class:FuturePriceLoader
+load	loaders/prices.py	/^    def load(self, ticker):$/;"	m	class:PriceLoader
+loader	loaders/history.py	/^    loader = HistoryLoader()  # Changed to HistoryLoader since futures isn't implemented yet$/;"	v
+loader	loaders/prices.py	/^    loader = CombinedPriceLoader()$/;"	v
+logger	client.py	/^logger = logging.getLogger(__name__)$/;"	v
+main	home.py	/^def main():$/;"	f
+np	loaders/prices.py	/^import numpy as np$/;"	I	nameref:module:numpy
+np	span.py	/^import numpy as np$/;"	I	nameref:module:numpy
+pd	client.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	data/basis.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	formatters.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	home.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	loaders/history.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	loaders/prices.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	span.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	utils/expiry_dates.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+pd	viewer.py	/^import pandas as pd$/;"	I	nameref:module:pandas
+perpetual_data	loaders/history.py	/^    perpetual_data = fetcher.get_futures_klines('BTC')$/;"	v
+px	home.py	/^import plotly.express as px$/;"	I	nameref:module:plotly.express
+quarterly_data	loaders/history.py	/^    quarterly_data = fetcher.get_futures_klines('BTC', contract_type='CURRENT_QUARTER')$/;"	v
+st	home.py	/^import streamlit as st$/;"	I	nameref:module:streamlit
+stcli	home.py	/^from streamlit.web import cli as stcli$/;"	x	nameref:unknown:cli
+table_format	formatters.py	/^def table_format(df, col_format="{:,.0f}", custom_formats=None):$/;"	f
+table_format_total	formatters.py	/^def table_format_total(df):$/;"	f
+table_heatmap	formatters.py	/^def table_heatmap(df, cmap='coolwarm', col_format="{:,.0f}"):$/;"	f
+table_heatmap_col	formatters.py	/^def table_heatmap_col(df, col, cmap='RdBu'):$/;"	f
+tickers	loaders/prices.py	/^    tickers = ['BTCBUST', 'BTCUSD_240329', 'BTCUSD_240628']$/;"	v
+tickers	loaders/prices.py	/^    tickers = ['LTCUSDT']$/;"	v
+timeseries	viewer.py	/^    def timeseries(self):$/;"	m	class:BasisViewer
+us_fetcher	client.py	/^us_fetcher = BinanceDataFetcher(use_us=True)$/;"	v
+value	data/basis.py	/^    value = ''$/;"	v	class:BasisSummaryTblBase
+value	data/basis.py	/^    value = 'basis'$/;"	v	class:BasisSummaryTblAbs
+value	data/basis.py	/^    value = 'irr'$/;"	v	class:BasisSummaryTblPct

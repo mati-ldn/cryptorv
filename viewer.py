@@ -22,6 +22,7 @@ class BasisViewer:
         ]
         df = df.set_index('symbol')
         df = df.iloc[1:]
+        df = df.sort_values('days_to_exp')
         return df
 
     def timeseries(self):
