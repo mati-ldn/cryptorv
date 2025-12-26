@@ -15,6 +15,8 @@ def main():
     with cols[0]:
         st.title(':classical_building: Crypto RV')
     with cols[1]:
+        if st.button("🔄 Refresh"):
+            st.rerun()
         timestamp = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
         st.write(timestamp)
 
